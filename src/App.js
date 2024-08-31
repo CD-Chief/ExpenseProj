@@ -1,91 +1,103 @@
-
-function Options(){
-
-  function HandleClick(){
-    const buttonId = currentTarget.getAttribute('data-id');
-  }
+function Title() {
 
   return (
-    <form>
-      <button data-id="createButton"> Create </button>
-      <button data-id="filterButton"> Filter </button>
-    </form>
+    <h1> Expense Tracker</h1>
   )
-
 }
 
-function CreateOrFilter(option, tags){
+function OptionButtons() {
+
+  return(
+    <div>
+      <button>Create</button>
+      <button>Filter</button>
+    </div>
+  )
+}
+
+function CreateRecord() {
 
   return (
     <div>
-      <div id="create" style={{ display: option ? "none"  : "block"}}>
-        <form>
-          <input type="text" placeholder="Record name..."/>
-        </form>
-      </div>
-
-      <div id="filter" style={{ display: option ? "block"  : "none"}}>
-        
-      </div>
+      <h3>Create Record</h3>
+      <form>
+        <input placeholder="Name..."></input>
+        <input placeholder="Add Tag..."></input>
+        <input placeholder="Value..."></input>
+        <button>Add</button>
+      </form>
     </div>
   )
-
 }
 
-function RecordsTable(records, filters){
-  const rows = []
+function FilterRecord() {
 
-  records.array.forEach(record => {
-    rows.push(<RecordRow record={record}/>)
-  });
+  return (
+    <div>
+    <h3>Filter Records</h3>
+    <form>
+      <input placeholder="Find Name..."></input>
+      <input placeholder="Find Tag..."></input>
+      <input placeholder="FInd Value..."></input>
+      <button>Filter</button>
+    </form>
+  </div>
+  )
+  
+}
+
+function OptionBox() {
 
   return(
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Tags</th>
-          <th>Value</th>
-        </tr>
-      </thead>
-      <tbody>{rows}</tbody>
-    </table>
+    <div>
+      <OptionButtons/>
+      <CreateRecord/>
+      <FilterRecord/>
+    </div>
   )
 }
 
-function RecordRow(record){
-  return(
+function RecordList() {
+
+  return (
     <tr>
-      <td>{record.name}</td>
-      <td>{record.tags}</td>
-      <td>{record.value}</td>
+      <th>Name</th>
+      <th>Tags</th>
+      <th>Value</th>
     </tr>
   )
-}
-
-function Totals(filtRecords){
 
 }
 
-const RECORDS = [
-  {name: "Tuition", tags: ["Uni", "Large"], value: -15600},
-  {name: "Accomodation", tags: ["Uni", "Living"], value: -4000},
-  {name: "Work", tags: ["income"], value: 5000}
-]
-
-const TAGS = [ "Uni", "Large", "Living", "Income"]
-
-//App
-export default function ExpenseTracker(){
+function Totals() {
 
   return (
     <div>
-      <h1> Expense Tracker </h1>
-      <Options/>
-      <CreateOrFilter/>
+      <h4>Total Records: </h4>
+      <h4>Total Tags: </h4>
+      <h4>Total value: </h4>
     </div>
-    
-
   )
 
+}
+
+function RecordBox() {
+
+  return(
+    <div>
+      <RecordList/>
+      <Totals/>
+    </div>
+  )
+}
+
+export default function ExpenseTracker() {
+
+  return(
+    <div>
+      <Title/>
+      <OptionBox/>
+      <RecordBox/>
+    </div>
+  )
 }
