@@ -57,18 +57,35 @@ function OptionBox() {
   )
 }
 
-function RecordRow() {
-
-}
-
-function RecordList() {
+function RecordRow({ record }) {
 
   return (
     <tr>
-      <th>Name</th>
-      <th>Category</th>
-      <th>Value</th>
+      <td>{record.name}</td>
+      <td>{record.category}</td>
+      <td>{record.value}</td>
     </tr>
+  )
+}
+
+function RecordList({ records }) {
+
+  return (
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        {records}
+      </tbody>
+    </table>
+
+
   )
 
 }
@@ -86,6 +103,7 @@ function Totals({totals}) {
 }
 
 function RecordBox() {
+
 
   return(
     <div>
