@@ -22,7 +22,7 @@ function CreateRecord() {
       <h3>Create Record</h3>
       <form>
         <input placeholder="Name..."></input>
-        <input placeholder="Add Tag..."></input>
+        <input placeholder="Category..."></input>
         <input placeholder="Value..."></input>
         <button>Add</button>
       </form>
@@ -37,7 +37,7 @@ function FilterRecord() {
     <h3>Filter Records</h3>
     <form>
       <input placeholder="Find Name..."></input>
-      <input placeholder="Find Tag..."></input>
+      <input placeholder="Find Category..."></input>
       <input placeholder="FInd Value..."></input>
       <button>Filter</button>
     </form>
@@ -57,24 +57,28 @@ function OptionBox() {
   )
 }
 
+function RecordRow() {
+
+}
+
 function RecordList() {
 
   return (
     <tr>
       <th>Name</th>
-      <th>Tags</th>
+      <th>Category</th>
       <th>Value</th>
     </tr>
   )
 
 }
 
-function Totals() {
+function Totals({totals}) {
 
   return (
     <div>
       <h4>Total Records: </h4>
-      <h4>Total Tags: </h4>
+      <h4>Total Categories: </h4>
       <h4>Total value: </h4>
     </div>
   )
