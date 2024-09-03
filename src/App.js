@@ -1,3 +1,5 @@
+import { useState, createContext, useContext } from 'react';
+
 function Title() {
 
   return (
@@ -70,6 +72,7 @@ function RecordRow({ record }) {
 
 function RecordList({ records }) {
 
+
   return (
 
     <table>
@@ -104,7 +107,6 @@ function Totals({totals}) {
 
 function RecordBox() {
 
-
   return(
     <div>
       <RecordList/>
@@ -114,12 +116,22 @@ function RecordBox() {
 }
 
 export default function ExpenseTracker() {
+  const [records, setRecords] = useState();
+  const [filteredRecords, setFilteredRecords] = useState();
+
+  const RecordContext = createContext();
+  const FilteredContext = createContext();
 
   return(
-    <div>
-      <Title/>
-      <OptionBox/>
-      <RecordBox/>
-    </div>
+    <RecordContext.Provider value={{ records,setRecords }}>
+      <FilteredContext.Provider value={{ filteredRecords,setFilteredRecords}}>
+        <div>
+          <Title/>
+          <OptionBox/>
+          <RecordBox/>
+        </div>
+      </FilteredContext.Provider>
+    </RecordContext.Provider>
+    
   )
 }
