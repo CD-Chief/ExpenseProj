@@ -17,15 +17,30 @@ function OptionButtons() {
   )
 }
 
-function CreateRecord() {
+  function CreateRecord() {
+    const {records, setRecords} = useContext(RecordContext);
+
+    const [inputs, setInputs] = useState({
+      name: "",
+      category: "",
+      value: ""
+    });
+
+  const handleChange = (event) => {
+    const [name, value] =event.target;
+    setInputs({
+      ...inputs,
+      [name]: value
+    });
+  }
 
   return (
     <div>
       <h3>Create Record</h3>
       <form>
-        <input placeholder="Name..."></input>
-        <input placeholder="Category..."></input>
-        <input placeholder="Value..."></input>
+        <input placeholder="Name..." name='name' value={inputs.name} ></input>
+        <input placeholder="Category..." name='category' value={inputs.category}></input>
+        <input placeholder="Value..." name='value' value={inputs.value}></input>
         <button>Add</button>
       </form>
     </div>
@@ -70,7 +85,8 @@ function RecordRow({ record }) {
   )
 }
 
-function RecordList({ records }) {
+function RecordList() {
+  const {records, setRecords} = useContext(RecordContext);
 
 
   return (
