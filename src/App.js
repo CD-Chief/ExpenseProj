@@ -146,12 +146,12 @@ function RecordBox() {
   )
 }
 
+export const RecordContext = createContext();
+export const FilteredContext = createContext();
+
 export default function ExpenseTracker() {
   const [records, setRecords] = useState([]);
   const [filteredRecords, setFilteredRecords] = useState([]);
-
-  const RecordContext = createContext();
-  const FilteredContext = createContext();
 
   return(
     <RecordContext.Provider value={{ records,setRecords }}>
