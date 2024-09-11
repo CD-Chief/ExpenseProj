@@ -34,6 +34,21 @@ function OptionButtons() {
     });
   }
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    for (const inpNum in inputs){
+      if (inputs[inpNum].trim == "") {
+        alert("Must fill all spaces");
+        return;
+      }else{
+        setRecords(prevRecords => [...prevRecords, <RecordRow record={inputs}/>])
+      }
+
+    }
+
+  }
+
   return (
     <div>
       <h3>Create Record</h3>
@@ -132,8 +147,8 @@ function RecordBox() {
 }
 
 export default function ExpenseTracker() {
-  const [records, setRecords] = useState();
-  const [filteredRecords, setFilteredRecords] = useState();
+  const [records, setRecords] = useState([]);
+  const [filteredRecords, setFilteredRecords] = useState([]);
 
   const RecordContext = createContext();
   const FilteredContext = createContext();
