@@ -27,7 +27,9 @@ function OptionButtons() {
     });
 
   const handleChange = (event) => {
-    const [name, value] =event.target;
+    console.log("Error 1");
+    const {name, value} =event.target;
+    console.log("Error 2");
     setInputs({
       ...inputs,
       [name]: value
@@ -53,10 +55,10 @@ function OptionButtons() {
     <div>
       <h3>Create Record</h3>
       <form>
-        <input placeholder="Name..." name='name' value={inputs.name} ></input>
-        <input placeholder="Category..." name='category' value={inputs.category}></input>
-        <input placeholder="Value..." name='value' value={inputs.value}></input>
-        <button>Add</button>
+          <input placeholder="Name..." name='name' value={inputs.name} onChange={handleChange} ></input>
+          <input placeholder="Category..." name='category' value={inputs.category} onChange={handleChange}></input>
+          <input placeholder="Value..." name='value' value={inputs.value} onChange={handleChange}></input>
+        <button onClick={handleSubmit}>Add</button>
       </form>
     </div>
   )
