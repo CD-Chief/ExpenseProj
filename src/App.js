@@ -43,11 +43,10 @@ function OptionButtons() {
       if (inputs[inpNum].trim == "") {
         alert("Must fill all spaces");
         return;
-      }else{
-        setRecords(prevRecords => [...prevRecords, <RecordRow record={inputs}/>])
       }
-
     }
+    
+    setRecords(prevRecords => [...prevRecords, <RecordRow record={inputs}/>])
 
   }
 
