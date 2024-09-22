@@ -19,6 +19,7 @@ function OptionButtons() {
 
   function CreateRecord() {
     const {records, setRecords} = useContext(RecordContext);
+    const {filteredRecords, setFilteredRecords} = useContext(FilteredContext);
 
     const [inputs, setInputs] = useState({
       name: "",
@@ -27,28 +28,30 @@ function OptionButtons() {
     });
 
   const handleChange = (event) => {
-    console.log("Error 1");
     const {name, value} =event.target;
-    console.log("Error 2");
     setInputs({
       ...inputs,
       [name]: value
     });
-  }
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const tempArray = [...records];
 
-    for (const inpNum in inputs){
-      if (inputs[inpNum].trim == "") {
-        alert("Must fill all spaces");
+    for (const inpField in inputs){
+      if (inputs[inpField].trim() === '') {
+        alert("Must fill all spaces before adding");
         return;
-      }
-    }
+      };
+    };
     
-    setRecords(prevRecords => [...prevRecords, <RecordRow record={inputs}/>])
+    tempArray.push(<RecordRow record={inputs}/>);
+    setRecords(tempArray);
+    setFilteredRecords(tempArray);
 
-  }
+
+  };
 
   return (
     <div>
@@ -64,15 +67,81 @@ function OptionButtons() {
 }
 
 function FilterRecord() {
+  const {records, setRecords} = useContext(RecordContext);
+  const {filteredRecords, setFilteredRecords} = useContext(FilteredContext);
+
+  const [inputs, setInputs] = useState({
+    name: "",
+    category: "",
+    value: ""
+  });
+
+  const handleChange = (event) => {
+    const {name, value} =event.target;
+    setInputs({
+      ...inputs,
+      [name]: value
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const filteredArray = [];
+
+    // Index of which element to add
+    let index;
+
+    let input;
+    let filledFields = 0;
+
+    for (const  inpField in inputs){
+      if (inputs[inpField].trim() !== '') {
+        console.log(inputs[inpField]);
+        filledFields += 1;
+        input = inputs[inpField];
+
+        switch (inpField) {
+          case "name":
+            index = filteredRecords.findIndex(el => el.name === input);
+            if (index !== -1){
+              console.log(index);
+              filteredArray.add(filteredRecords[index]);
+            }
+            break;
+          case "category":
+            break;
+          case "value":
+            break;
+        }
+      }
+    }
+
+
+    // If button was pressed with no inputs
+    if (filledFields === 0){
+      setFilteredRecords([...records]);
+    }else {
+      setFilteredRecords(filteredArray);
+    }
+
+    // Clear Fields after
+    setInputs({
+      name: "",
+      category: "",
+      value: ""
+    });
+};
+
 
   return (
     <div>
     <h3>Filter Records</h3>
     <form>
-      <input placeholder="Find Name..."></input>
-      <input placeholder="Find Category..."></input>
-      <input placeholder="FInd Value..."></input>
-      <button>Filter</button>
+      <input placeholder="Find Name..." name='name' value={inputs.name} onChange={handleChange}></input>
+      <input placeholder="Find Category..." name='category' value={inputs.category} onChange={handleChange}></input>
+      <input placeholder="Find Value..." name='value' value={inputs.value} onChange={handleChange}></input>
+      <button onClick={handleSubmit}>Filter</button>
     </form>
   </div>
   )
@@ -102,7 +171,7 @@ function RecordRow({ record }) {
 }
 
 function RecordList() {
-  const {records, setRecords} = useContext(RecordContext);
+  const {filteredRecords, setFilteredRecords} = useContext(FilteredContext);
 
 
   return (
@@ -116,7 +185,7 @@ function RecordList() {
         </tr>
       </thead>
       <tbody>
-        {records}
+        {filteredRecords}
       </tbody>
     </table>
 
