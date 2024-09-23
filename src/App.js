@@ -1,3 +1,4 @@
+import { toHaveTextContent } from '@testing-library/jest-dom/matchers';
 import { useState, createContext, useContext } from 'react';
 
 function Title() {
@@ -87,6 +88,7 @@ function FilterRecord() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    const tempFilteredRecords = [...filteredRecords];
     const filteredArray = [];
 
     // Index of which element to add
@@ -96,23 +98,26 @@ function FilterRecord() {
     let filledFields = 0;
 
     for (const  inpField in inputs){
-      if (inputs[inpField].trim() !== '') {
-        console.log(inputs[inpField]);
-        filledFields += 1;
-        input = inputs[inpField];
+      for (let i = tempFilteredRecords.length ; i > 0 ; i--){
+        if (inputs[inpField].trim() !== '') {
+          filledFields += 1;
+          input = inputs[inpField];
 
-        switch (inpField) {
-          case "name":
-            index = filteredRecords.findIndex(el => el.name === input);
-            if (index !== -1){
+          switch (inpField) {
+            case "name":
+              console.log("No Error");
+              index = tempFilteredRecords.findIndex(el => el.props.record.name === input);
               console.log(index);
-              filteredArray.add(filteredRecords[index]);
-            }
-            break;
-          case "category":
-            break;
-          case "value":
-            break;
+              if (index !== -1){
+                tempFilteredRecords.splice(index, 1)
+                filteredArray.push(filteredRecords[index]);
+              }
+              break;
+            case "category":
+              break;
+            case "value":
+              break;
+          }
         }
       }
     }
