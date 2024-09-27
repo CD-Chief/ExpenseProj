@@ -86,14 +86,11 @@ function FilterRecord() {
   };
 
   const handleSubmit = (event) => {
-    console.log("hello")
     event.preventDefault();
 
     const tempFilteredRecords = [...filteredRecords];
     const filteredArray = [];
-
     let filledFields = 0;
-
     let true3;
 
     //Check if inputs are filled
@@ -111,7 +108,6 @@ function FilterRecord() {
     console.log(filledFields);
     if (filledFields === 0) {
       setFilteredRecords([...records]);
-      console.log("return");
       return
     };
 
@@ -119,19 +115,16 @@ function FilterRecord() {
       let currentRecord = tempFilteredRecords[i];
       true3 = 0;
 
-      console.log(currentRecord);
-
       // Check name
       if (currentRecord.props.record.name === inputs.name || inputs.name.trim() === ""){
-        console.log("name true")
         true3 += 1;
       }
+      //Check category
       if (currentRecord.props.record.category === inputs.category || inputs.category.trim() === ""){
-        console.log("cat true")
         true3 += 1;
       }
+      //Check value
       if (currentRecord.props.record.value === inputs.value || inputs.value.trim() === ""){
-        console.log("val true")
         true3 += 1;
       }
 
