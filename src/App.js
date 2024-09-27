@@ -86,49 +86,65 @@ function FilterRecord() {
   };
 
   const handleSubmit = (event) => {
+    console.log("hello")
     event.preventDefault();
 
     const tempFilteredRecords = [...filteredRecords];
     const filteredArray = [];
 
-    // Index of which element to add
-    let index;
-
-    let input;
     let filledFields = 0;
 
-    for (const  inpField in inputs){
-      for (let i = tempFilteredRecords.length ; i > 0 ; i--){
-        if (inputs[inpField].trim() !== '') {
-          filledFields += 1;
-          input = inputs[inpField];
+    let true3;
 
-          switch (inpField) {
-            case "name":
-              console.log("No Error");
-              index = tempFilteredRecords.findIndex(el => el.props.record.name === input);
-              console.log(index);
-              if (index !== -1){
-                tempFilteredRecords.splice(index, 1)
-                filteredArray.push(filteredRecords[index]);
-              }
-              break;
-            case "category":
-              break;
-            case "value":
-              break;
-          }
-        }
+    //Check if inputs are filled
+    if (inputs.name.trim() !== ""){
+      filledFields += 1;
+    }
+    if (inputs.category.trim() !== ""){
+      filledFields += 1;
+    }
+    if (inputs.value.trim() !== ""){
+      filledFields += 1;
+    }
+    
+    // If button was pressed with no inputs
+    console.log(filledFields);
+    if (filledFields === 0) {
+      setFilteredRecords([...records]);
+      console.log("return");
+      return
+    };
+
+    for (let i = 0; i < tempFilteredRecords.length ; i++){
+      let currentRecord = tempFilteredRecords[i];
+      true3 = 0;
+
+      console.log(currentRecord);
+
+      // Check name
+      if (currentRecord.props.record.name === inputs.name || inputs.name.trim() === ""){
+        console.log("name true")
+        true3 += 1;
+      }
+      if (currentRecord.props.record.category === inputs.category || inputs.category.trim() === ""){
+        console.log("cat true")
+        true3 += 1;
+      }
+      if (currentRecord.props.record.value === inputs.value || inputs.value.trim() === ""){
+        console.log("val true")
+        true3 += 1;
+      }
+
+      //If all are true
+      if (true3 === 3){
+        filteredArray.push(currentRecord);
       }
     }
 
+    
 
-    // If button was pressed with no inputs
-    if (filledFields === 0){
-      setFilteredRecords([...records]);
-    }else {
-      setFilteredRecords(filteredArray);
-    }
+    //Update array
+    setFilteredRecords(filteredArray);
 
     // Clear Fields after
     setInputs({
