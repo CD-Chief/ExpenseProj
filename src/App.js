@@ -47,6 +47,11 @@ function OptionButtons() {
       };
     };
     
+    if (parseInt(inputs.value) != inputs.value){
+      alert("Value must be a number");
+      return;
+    }
+
     tempArray.push(<RecordRow record={inputs}/>);
     setRecords(tempArray);
     setFilteredRecords(tempArray);
@@ -209,10 +214,18 @@ function RecordList() {
 }
 
 function Totals({totals}) {
+  const {filteredRecords, setFilteredRecords} = useContext(FilteredContext);
+
+  //Total records
+  const totalRecords = filteredRecords.length;
+
+  //Total categories
+
+  //Total value
 
   return (
     <div>
-      <h4>Total Records: </h4>
+      <h4>Total Records: {totalRecords} </h4>
       <h4>Total Categories: </h4>
       <h4>Total value: </h4>
     </div>
