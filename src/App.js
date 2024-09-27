@@ -110,7 +110,6 @@ function FilterRecord() {
     }
     
     // If button was pressed with no inputs
-    console.log(filledFields);
     if (filledFields === 0) {
       setFilteredRecords([...records]);
       return
@@ -219,15 +218,17 @@ function Totals({totals}) {
   //Total records
   const totalRecords = filteredRecords.length;
 
-  //Total categories
-
   //Total value
+  let totalValue = 0;
+  for (let currentRecord of filteredRecords){
+    totalValue += parseInt(currentRecord.props.record.value);
+  }
+
 
   return (
-    <div>
+    <div> 
       <h4>Total Records: {totalRecords} </h4>
-      <h4>Total Categories: </h4>
-      <h4>Total value: </h4>
+      <h4>Total value: {totalValue} </h4>
     </div>
   )
 
