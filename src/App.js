@@ -1,4 +1,4 @@
-import { toHaveTextContent } from '@testing-library/jest-dom/matchers';
+
 import { useState, createContext, useContext } from 'react';
 
 function Title() {
@@ -39,7 +39,7 @@ function OptionButtons({setCreatePanel}) {
 
   function CreateRecord() {
     const {records, setRecords} = useContext(RecordContext);
-    const {filteredRecords, setFilteredRecords} = useContext(FilteredContext);
+    const {setFilteredRecords} = useContext(FilteredContext);
 
     const [inputs, setInputs] = useState({
       name: "",
@@ -92,7 +92,7 @@ function OptionButtons({setCreatePanel}) {
 }
 
 function FilterRecord() {
-  const {records, setRecords} = useContext(RecordContext);
+  const {records} = useContext(RecordContext);
   const {filteredRecords, setFilteredRecords} = useContext(FilteredContext);
 
   const [inputs, setInputs] = useState({
@@ -208,7 +208,7 @@ function RecordRow({ record }) {
 }
 
 function RecordList() {
-  const {filteredRecords, setFilteredRecords} = useContext(FilteredContext);
+  const {filteredRecords} = useContext(FilteredContext);
 
 
   return (
@@ -232,7 +232,7 @@ function RecordList() {
 }
 
 function Totals({totals}) {
-  const {filteredRecords, setFilteredRecords} = useContext(FilteredContext);
+  const {filteredRecords} = useContext(FilteredContext);
 
   //Total records
   const totalRecords = filteredRecords.length;
