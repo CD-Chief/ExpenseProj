@@ -200,7 +200,7 @@ function OptionBox() {
 function RecordRow({ record }) {
 
   return (
-    <tr>
+    <tr className='record'>
       <td>{record.name}</td>
       <td>{record.category}</td>
       <td>{record.value}</td>
@@ -210,7 +210,6 @@ function RecordRow({ record }) {
 
 function RecordList() {
   const {filteredRecords} = useContext(FilteredContext);
-
 
   return (
     <table className='record-table'>

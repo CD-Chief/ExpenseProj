@@ -20,6 +20,8 @@ h1 {
 
 .record-table {
   margin: auto;
+  min-width: 50%;
+  width: auto;
 }
 
 .totals-box {
