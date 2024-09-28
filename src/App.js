@@ -1,4 +1,5 @@
 
+import './App.css';
 import { useState, createContext, useContext } from 'react';
 
 function Title() {
@@ -30,9 +31,9 @@ function OptionButtons({setCreatePanel}) {
   }
 
   return(
-    <div>
-      <button name='Create' onClick={handleClick}>Create</button>
-      <button name='Filter' onClick={handleClick}>Filter</button>
+    <div className='option-buttons-box'>
+      <button className='option-buttons' name='Create' onClick={handleClick}>Create</button>
+      <button className='option-buttons' name='Filter' onClick={handleClick}>Filter</button>
     </div>
   )
 }
@@ -79,7 +80,7 @@ function OptionButtons({setCreatePanel}) {
   };
 
   return (
-    <div>
+    <div className='create-record-box'>
       <h3>Create Record</h3>
       <form>
           <input placeholder="Name..." name='name' value={inputs.name} onChange={handleChange} ></input>
@@ -172,15 +173,15 @@ function FilterRecord() {
 
 
   return (
-    <div>
-    <h3>Filter Records</h3>
-    <form>
-      <input placeholder="Find Name..." name='name' value={inputs.name} onChange={handleChange}></input>
-      <input placeholder="Find Category..." name='category' value={inputs.category} onChange={handleChange}></input>
-      <input placeholder="Find Value..." name='value' value={inputs.value} onChange={handleChange}></input>
-      <button onClick={handleSubmit}>Filter</button>
-    </form>
-  </div>
+    <div className='filter-button-box'>
+      <h3>Filter Records</h3>
+        <form>
+          <input placeholder="Find Name..." name='name' value={inputs.name} onChange={handleChange}></input>
+          <input placeholder="Find Category..." name='category' value={inputs.category} onChange={handleChange}></input>
+          <input placeholder="Find Value..." name='value' value={inputs.value} onChange={handleChange}></input>
+          <button onClick={handleSubmit}>Filter</button>
+        </form>
+    </div>
   )
   
 }
@@ -212,8 +213,7 @@ function RecordList() {
 
 
   return (
-
-    <table>
+    <table className='record-table'>
       <thead>
         <tr>
           <th>Name</th>
@@ -245,9 +245,9 @@ function Totals({totals}) {
 
 
   return (
-    <div> 
-      <h4>Total Records: {totalRecords} </h4>
-      <h4>Total value: {totalValue} </h4>
+    <div className='totals-box'> 
+      <h4 className='total' id='total-records' >Total Records: {totalRecords} </h4>
+      <h4 className='total' id='total-value' >Total value: {totalValue} </h4>
     </div>
   )
 
