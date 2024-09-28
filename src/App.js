@@ -8,12 +8,31 @@ function Title() {
   )
 }
 
-function OptionButtons() {
+function OptionButtons({setCreatePanel}) {
+  const {records} = useContext(RecordContext);
+  const {setFilteredRecords} = useContext(FilteredContext);
+
+  const handleClick = (event) => {
+    event.preventDefault();
+    const element = event.target;
+
+
+    console.log(element.name);
+
+    if (element.name === "Create"){
+      console.log("Working");
+      setCreatePanel(true);
+      setFilteredRecords([...records]);
+    } else {
+      setCreatePanel(false);
+      console.log("Working");
+    }
+  }
 
   return(
     <div>
-      <button>Create</button>
-      <button>Filter</button>
+      <button name='Create' onClick={handleClick}>Create</button>
+      <button name='Filter' onClick={handleClick}>Filter</button>
     </div>
   )
 }
@@ -167,12 +186,12 @@ function FilterRecord() {
 }
 
 function OptionBox() {
+  const [createPanel, setCreatePanel] = useState(true);
 
   return(
     <div>
-      <OptionButtons/>
-      <CreateRecord/>
-      <FilterRecord/>
+      <OptionButtons setCreatePanel={setCreatePanel}/>
+      {createPanel ? <CreateRecord /> : <FilterRecord />}
     </div>
   )
 }
